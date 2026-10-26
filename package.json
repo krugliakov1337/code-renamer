@@ -1,0 +1,33 @@
+{
+  "name": "code-renamer",
+  "displayName": "Code Renamer",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "activationEvents": [
+    "onCommand:codestyle.changeCase"
+  ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "codestyle.changeCase",
+        "title": "Change Variable Case"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "codestyle.changeCase",
+        "key": "alt+c",
+        "mac": "alt+c",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ]
+  }
+}
