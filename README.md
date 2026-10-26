@@ -1,71 +1,50 @@
-# code-renamer README
+# Code Renamer — VS Code Extension
 
-This is the README for your extension "code-renamer". After writing up a brief description, we recommend including the following sections.
+Плагин для Visual Studio Code, позволяющий быстро менять кодстайл (нотацию) переменных и идентификаторов прямо в редакторе.
 
-## Features
+## Возможности
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+* **Автозахват слова под курсором** — выделять переменную целиком не обязательно, достаточно поставить на неё курсор.
+* **Живое превью (Live Preview)** — в меню выбора сразу отображается итоговый вид переменной для каждого формата.
+* **Поддержка мультикурсора** — одновременная конвертация сразу нескольких переменных в разных строках файла.
+* **Умное разбиение на слова** — корректно распознаёт границы слов в любом исходном формате (включая смешанные названия и аббревиатуры).
 
-For example if there is an image subfolder under your extension project workspace:
+## Поддерживаемые форматы
 
-\!\[feature X\]\(images/feature-x.png\)
+| Формат | Пример результата | Типичное применение |
+| :--- | :--- | :--- |
+| `camelCase` | `userAccountId` | Переменные и методы (JS/TS, Java, C++) |
+| `snake_case` | `user_account_id` | Переменные и функции (Python, C/C++, Rust) |
+| `PascalCase` | `UserAccountId` | Классы, структуры, интерфейсы, типы |
+| `UPPER_SNAKE_CASE` | `USER_ACCOUNT_ID` | Глобальные константы и макросы |
+| `kebab-case` | `user-account-id` | CSS-селекторы, имена файлов, ключи конфигов |
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Использование
 
-## Requirements
+1. Поставьте курсор на переменную (или выделите несколько переменных через мультикурсор).
+2. Вызовите команду одним из способов:
+   * Нажмите горячую клавишу **`Alt + C`**.
+   * Откройте палитру команд (**`Ctrl + Shift + P`** / **`Cmd + Shift + P`**) и выберите **`Change Variable Case`**.
+3. Выберите нужный кодстайл в выпадающем меню и нажмите **`Enter`**.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Установка и сборка из исходников
 
-## Extension Settings
+```bash
+# Клонирование репозитория
+git clone <ссылка-на-твой-репозиторий>
+cd code-renamer
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+# Установка зависимостей
+npm install
 
-For example:
+# Компиляция TypeScript
+npm run compile
+```
 
-This extension contributes the following settings:
+Для запуска в режиме отладки откройте папку проекта в VS Code и нажмите **`F5`** — откроется тестовое окно `[Extension Development Host]` с активированным плагином.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## Структура проекта
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+* `src/extension.ts` — основная логика парсинга токенов и регистрации команды `codestyle.changeCase`.
+* `package.json` — манифест расширения, описание команд и привязка горячих клавиш (`keybindings`).
+* `tsconfig.json` — конфигурация компилятора TypeScript.
